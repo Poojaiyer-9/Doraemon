@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doraemon Cartoon</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #cceeff, #e6f7ff);
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(90deg, #ff4ecb, #ffcd00, #00f9ff, #a5ff4e);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 5s ease infinite;
+        }
+
+        @keyframes textGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .doraemon-image {
+            width: 300px;
+            margin: 30px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .description {
+            font-size: 1.3em;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        .controls button {
+            background-color: #00aaff;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 1em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .controls button:hover {
+            background-color: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Doraemon's World!</h1>
+    <img src="file:///C:/Users/Hp/OneDrive/Desktop/devops/doremon.png" alt="Doremon">
+
+    <div class="description">
+        <p>Doraemon is a robotic cat from the future who helps Nobita with futuristic gadgets from his magical pocket. He’s blue, round, and loves dorayaki!</p>
+    </div>
+
+    <div class="controls">
+        <button onclick="playMusic()">▶ Play</button>
+        <button onclick="pauseMusic()">⏸ Pause</button>
+    </div>
+
+    <audio id="bg-music" src="{{ url_for('static', filename='doremon.mp3') }}" autoplay loop></audio>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        
+        function playMusic() {
+            music.play();
+        }
+
+        function pauseMusic() {
+            music.pause();
+        }
+
+        // Optional: try to autoplay on load (may be blocked by some browsers)
+        window.addEventListener("load", () => {
+            music.volume = 0.5; // Adjust volume
+            music.play().catch(() => {
+                // Some browsers block autoplay, user must click Play
+                console.log("Autoplay blocked by browser.");
+            });
+        });
+    </script>
+</body>
+</html>
